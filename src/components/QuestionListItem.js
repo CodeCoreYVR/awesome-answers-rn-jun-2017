@@ -3,19 +3,21 @@ import {
   View,
   Text,
   Image,
-  Dimensions
+  Dimensions,
+  TouchableOpacity
 } from 'react-native';
 
 const {height, width} = Dimensions.get('window');
 
 function QuestionListItem (props) {
-  const {title, author_name} = props;
+  const {id, title, author_name, navigation} = props;
   return (
-    <View style={{
+    <TouchableOpacity
+      onPress={() => navigation.navigate('QuestionsShow', {id})}
+      style={{
       flexDirection: 'row',
       paddingTop: 5,
-      paddingBottom: 5,
-    }}>
+      paddingBottom: 5 }}>
       <View style={{marginRight: 5}}>
         <Image style={{width: 50, height: 50, borderRadius: 5}} source={{uri: 'https://i.imgur.com/e9wMaRx.jpg'}} />
       </View>
@@ -27,7 +29,7 @@ function QuestionListItem (props) {
           numberOfLines={1}>{title}</Text>
         <Text>{author_name}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 

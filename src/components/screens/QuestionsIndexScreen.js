@@ -9,6 +9,10 @@ import QuestionListItem from '../QuestionListItem';
 import { Question } from '../../utilities/requests';
 
 class QuestionsIndexScreen extends Component {
+  static navigationOptions = {
+    title: 'Questions'
+  }
+
   constructor (props) {
     super(props);
 
@@ -26,6 +30,10 @@ class QuestionsIndexScreen extends Component {
   render () {
     const {questions} = this.state;
 
+    // The `navigation` prop is passed by navigators from react-navigation.
+    // The prop is an object with methods to navigate to different screens on the StackNavigator
+    // component or the TabNavigator component.
+    const {navigation} = this.props;
     // <FlatList ... /> is a component optimized for rendering
     // large lists of data. It only renders as many list item
     // components on the screen as it needs (as many it can fit.)
@@ -36,7 +44,7 @@ class QuestionsIndexScreen extends Component {
         data={questions}
         keyExtractor={question => question.id}
         renderItem={
-          ({item}) => <QuestionListItem {...item} />
+          ({item}) => <QuestionListItem navigation={navigation} {...item} />
         } />
     );
   }
